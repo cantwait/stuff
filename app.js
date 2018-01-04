@@ -1,4 +1,5 @@
 var express = require('express');
+require('dotenv').config();
 const http = require('http');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -9,7 +10,7 @@ const WebSocket = require('ws');
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-mongoose.connect('mongodb://taxes:taxes@ds053648.mlab.com:53648/heroku_xd6mfl0k', {},(err)=>{
+mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URL}`, {},(err)=>{
     if(err){
         console.log(err)
     }
