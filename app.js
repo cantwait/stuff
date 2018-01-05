@@ -19,6 +19,7 @@ mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PA
 //Routers
 var users = require('./routes/users');
 const containers = require('./routes/containers');
+const taxes = require('./routes/taxes');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(cookieParser())
 
 app.use('/api/v1/users', users);
 app.use('/api/v1/containers', containers);
+app.use('/api/v1/taxes', taxes);
 
 server.on('request', app);
 
