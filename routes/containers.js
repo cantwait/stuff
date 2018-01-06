@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Container = require('../model/container');
+const mongoose = require('mongoose')
 
 router.get('/', function(req, res, next) {
     Container.find({},(err,obj)=>{
@@ -17,10 +18,10 @@ router.get('/:id/taxes', function(req, res, next) {
                 from: "taxes",
                 localField: "_id",
                 foreignField: "container",
-                as: "txs"
+                as: "taxes"
               }
          },
-         { $match : { _id : req.params.id } }
+         { $match : { _id : mongoose.Types.ObjectId(req.params.id) } }
     ]).exec((err,obj)=>{
         if(err) res.status(500).send(err);
         res.json(obj);
